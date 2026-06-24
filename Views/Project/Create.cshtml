@@ -1,0 +1,49 @@
+﻿@model PortfolioAdminPanel.Models.ProjectItem
+
+@{
+    ViewData["Title"] = "Yeni Proje Ekle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Yeni Proje Ekle</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Proje Başlığı</label>
+                            <input asp-for="Title" class="form-control" placeholder="Örn: FPS Arena Survival veya QA Automation Sprint" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kullanılan Teknolojiler</label>
+                            <input asp-for="Technologies" class="form-control" placeholder="Örn: Unreal Engine 5, Blueprints veya Selenium, Docker" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Proje Açıklaması</label>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Projenin amacını ve detaylarını buraya yazın..." required></textarea>
+                        </div>
+
+                        <div class="form-check form-switch mb-4 mt-3">
+                            <input class="form-check-input" type="checkbox" asp-for="IsCompleted" id="flexSwitchCheckDefault">
+                            <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">
+                                Bu proje tamamen bitti mi?
+                            </label>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="/Project/Index" class="btn btn-outline-secondary">Listeye Dön</a>
+                            <button type="submit" class="btn btn-success px-4">Projeyi Kaydet</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

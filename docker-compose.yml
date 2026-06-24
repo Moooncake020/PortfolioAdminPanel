@@ -1,0 +1,30 @@
+﻿version: '3.8'
+
+services:
+  # 1. SQL Server Veritabanı Konteyneri
+  sqldb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin12345!_Strong
+    ports:
+      - "1433:1433"
+    # Verilerin konteyner silindiğinde kaybolmaması için Volume tanımlıyoruz
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  # 2. C# MVC Web Uygulaması Konteyneri
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # LocalDB yerine, yukarıdaki sqldb isimli konteynere bağlanmasını söylüyoruz
+      - ConnectionStrings__DefaultConnection=Server=sqldb;Database=PortfolioAdminDb;User Id=sa;Password=Admin12345!_Strong;TrustServerCertificate=True;
+    depends_on:
+      - sqldb
+
+volumes:
+  sqldata:

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PortfolioAdminPanel.Models.ProjectItem>
+
+@{
+    ViewData["Title"] = "Yazılım Portfolyosu";
+}
+
+<div class="text-center mt-5 mb-5">
+    <h1 class="display-4 fw-bold">Projelerim ve Çalışmalarım</h1>
+    <p class="lead text-muted">Üzerinde çalıştığım teknolojiler ve tamamladığım projelerin güncel listesi.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    @if (!Model.Any())
+    {
+        <div class="col-12 text-center mt-5">
+            <h5 class="text-muted"><em>Henüz sergilenecek tamamlanmış bir proje bulunmuyor.</em></h5>
+            <p class="text-secondary">Yönetim panelinden "Tamamlandı" olarak işaretlenen projeler burada görünecektir.</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">@item.Title</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-3">
+                            <span class="badge bg-primary">@item.Technologies</span>
+                        </h6>
+                        <p class="card-text text-secondary">@item.Description</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 text-muted small text-end">
+                        Eklenme Tarihi: @item.CreatedDate.ToString("dd.MM.yyyy")
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

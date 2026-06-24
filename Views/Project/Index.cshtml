@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PortfolioAdminPanel.Models.ProjectItem>
+
+@{
+    ViewData["Title"] = "Proje Yönetim Paneli";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-secondary fw-bold">Proje Yönetim Paneli</h2>
+        <a href="/Project/Create" class="btn btn-success shadow-sm">+ Yeni Proje Ekle</a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 8%">ID</th>
+                        <th style="width: 25%">Proje Başlığı</th>
+                        <th style="width: 25%">Kullanılan Teknolojiler</th>
+                        <th style="width: 15%">Durum</th>
+                        <th style="width: 12%">Kayıt Tarihi</th>
+                        <th style="width: 15%" class="text-center">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                <em>Henüz sisteme eklenmiş bir proje bulunamadı.</em>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td><strong>@item.Title</strong></td>
+                                <td>
+                                    <span class="badge bg-info text-dark">@item.Technologies</span>
+                                </td>
+                                <td>
+                                    @if (item.IsCompleted)
+                                    {
+                                        <span class="badge bg-success">Tamamlandı</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Devam Ediyor</span>
+                                    }
+                                </td>
+                                <td>@item.CreatedDate.ToString("dd.MM.yyyy")</td>
+                                <td class="text-center">
+                                    <a href="/Project/Edit/@item.Id" class="btn btn-sm btn-outline-warning me-1">Düzenle</a>
+                                    <a href="/Project/Delete/@item.Id" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bu projeyi silmek istediğinize emin misiniz?')">Sil</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Yönetici Girişi";
+    // Bu sayfanın varsayılan genel tasarıma (Layout) dahil olmasını istemiyoruz
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yönetici Girişi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-light d-flex align-items-center" style="height: 100vh;">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-header bg-dark text-white text-center py-4">
+                        <h4 class="mb-0 fw-bold">Yönetim Paneli</h4>
+                    </div>
+                    <div class="card-body p-4">
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger text-center shadow-sm">
+                                @ViewBag.Error
+                            </div>
+                        }
+
+                        <form asp-action="Login" method="post">
+                            <div class="mb-3">
+                                <label class="form-label text-muted fw-bold">Kullanıcı Adı</label>
+                                <input type="text" name="username" class="form-control py-2" placeholder="admin" required />
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold">Şifre</label>
+                                <input type="password" name="password" class="form-control py-2" placeholder="******" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Sisteme Giriş Yap</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
