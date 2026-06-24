@@ -20,10 +20,10 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: 3. Proje Bağımlılıklarını Yükle
-      run: dotnet restore PortfolioAdminPanel.sln
+      run: dotnet restore
 
     - name: 4. Projeyi Derle (Build Kontrolü)
-      run: dotnet build PortfolioAdminPanel.sln --no-restore -c Release
-
+      run: dotnet build --no-restore -c Release
+      
     - name: 5. Docker Konteynerlerini Test Et (Compose Build)
       run: docker-compose build
