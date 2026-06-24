@@ -26,4 +26,4 @@ jobs:
       run: dotnet build PortfolioAdminPanel.csproj --no-restore -c Release
       
     - name: 5. Docker Konteynerlerini Test Et (Compose Build)
-      run: docker-compose build
+      run: docker compose build
